@@ -1,0 +1,31 @@
+variant: fcos
+version: 1.6.0
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWN1MKH7ohXr9rFDCRQgJtAeI3hAbWunOvPYf26GVKU jlmayorga@MiniM4.localdomain
+storage:
+  directories:
+    - path: /etc/haproxy/
+  files:
+    - path: /etc/haproxy/haproxy.cfg
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/haproxy/haproxy/refs/heads/master/examples/basic-config-edge.cfg
+      mode: 0644
+    - path: /etc/containers/systemd/haproxy.container
+      contents:
+        inline: |
+          [Unit]
+          Description=HAProxy Service
+          Wants=network-online.target
+          After=network-online.target
+
+          [Container]
+          ContainerName=haproxy
+          Image=docker.io/library/haproxy:3.1
+          Exec=/usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg -db
+
+          [Install]
+          WantedBy=multi-user.target
