@@ -1,0 +1,40 @@
+{
+  "ignition": {
+    "version": "3.5.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGWN1MKH7ohXr9rFDCRQgJtAeI3hAbWunOvPYf26GVKU jlmayorga@MiniM4.localdomain"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "directories": [
+      {
+        "overwrite": true,
+        "path": "/etc/haproxy"
+      }
+    ],
+    "files": [
+      {
+        "overwrite": true,
+        "path": "/etc/haproxy/haproxy.cfg",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/haproxy/haproxy-1.8/master/examples/haproxy.cfg"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/containers/systemd/haproxy.container",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/3SPzUrEQBCE7/0UeYGZQbwJc1h/wL2IIOIh5NCZdGKzk56lp6Obtxcl8banquI7VFX7LmwdPFJNymfjIvH58KrlsjZvpF+cCD5QrEYh+y56ckUyC3lDncjgMBrpFQbtQxFDFtIO/u0LzhQ/8fxbAccZJ4pDSSdSzyVk7hV1DRu/u/U38HShFMNSNdSeZUeNG5tAlva8q0/j1LihB2iPUg1z7v4O0HC/xnnJxm6ppNvGnwAAAP//ajBFpv4AAAA="
+        }
+      }
+    ]
+  }
+}
